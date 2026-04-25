@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Week Inspiration Deck</title>
 
-  <!-- SAnE: LAYOUT ONLY -->
+  <!-- SAnE: LAYOUT + STATIC CONTENT -->
   <style>
     /* ===================== */
     /* LAYOUT */
@@ -57,6 +57,7 @@
       justify-content: center;
       align-items: center;
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
     }
 
     .week-card .card {
@@ -76,6 +77,25 @@
       text-align: center;
     }
 
+    /* ===================== */
+    /* CONTENT */
+    /* ===================== */
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .week-card .card-image {
+      min-height: 420px;
+    }
+
+    .day-card .card-image {
+      min-height: 260px;
+    }
+
     @media (max-width: 900px) {
       .cards {
         grid-template-columns: 1fr 1fr;
@@ -89,6 +109,11 @@
 
       .card,
       .week-card .card {
+        min-height: 280px;
+      }
+
+      .week-card .card-image,
+      .day-card .card-image {
         min-height: 280px;
       }
 
@@ -109,38 +134,36 @@
     <h1>Week Inspiration Deck (while Dima is away... ✈️🚢🌴🎉)</h1>
     <div class="subtitle">One weekly theme, five daily reveals - click a card to open...</div>
 
+    <!-- ===================== -->
+    <!-- CONTENT -->
+    <!-- ===================== -->
+
     <section class="week-card">
       <div class="card">
-        <div class="label">Weekly Theme</div>
-        <div class="hint">Click to reveal the theme for the week</div>
+        <img class="card-image" src="./week04_banner.png" alt="Weekly theme">
       </div>
     </section>
 
     <section class="cards">
 
-      <div class="card">
-        <div class="label">Monday</div>
-        <div class="hint">Click to reveal</div>
+      <div class="card day-card">
+        <img class="card-image" src="./week04_mon.png" alt="Monday theme">
       </div>
 
-      <div class="card">
-        <div class="label">Tuesday</div>
-        <div class="hint">Click to reveal</div>
+      <div class="card day-card">
+        <img class="card-image" src="./week04_tue.png" alt="Tuesday theme">
       </div>
 
-      <div class="card">
-        <div class="label">Wednesday</div>
-        <div class="hint">Click to reveal</div>
+      <div class="card day-card">
+        <img class="card-image" src="./week04_wed.png" alt="Wednesday theme">
       </div>
 
-      <div class="card">
-        <div class="label">Thursday</div>
-        <div class="hint">Click to reveal</div>
+      <div class="card day-card">
+        <img class="card-image" src="./week04_thu.png" alt="Thursday theme">
       </div>
 
-      <div class="card">
-        <div class="label">Friday</div>
-        <div class="hint">Click to reveal</div>
+      <div class="card day-card">
+        <img class="card-image" src="./week04_fri.png" alt="Friday theme">
       </div>
 
     </section>
