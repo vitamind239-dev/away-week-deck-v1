@@ -105,11 +105,12 @@
       overflow-y: auto;
     }
 
-    .card-back img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
 
     .label {
       font-size: 1.4rem;
@@ -179,6 +180,29 @@
         font-size: 1.6rem;
       }
     }
+/* ADD HERE ↓↓↓ */
+    
+    .card.expanded {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+      width: 70vw;
+      max-width: 900px;
+      height: auto;
+      z-index: 1000;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 999;
+    }  
   </style>
 </head>
 
@@ -195,23 +219,6 @@
             <div class="hint">Click to reveal the theme for the week</div>
           </div>
 
-<!--          <div class="card-back">
-            <div class="image-placeholder">Weekly image goes here</div>
-            <div class="quote">State what is.
-Reflect on what it means.
-State what you are doing
-while it remains so.</div>
-          -->
-           <!-- <div class="source">Historical or fictional character name</div> -->
-<!--            <div class="reflection">
-              This is not about drama, but about signal.
-Name reality plainly.
-Think clearly about what it means.
-Then declare your course and keep moving
-until the facts change.
-            </div>
-          </div>
-        -->
 <div class="card-back">
   <img src="./week04_banner.png" alt="Weekly theme">
 </div>       
@@ -222,20 +229,17 @@ until the facts change.
 
     <section class="cards">
 
-      <div class="card" onclick="flipCard(this)">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="label">Monday</div>
-            <div class="hint">Click to reveal</div>
-          </div>
-          <div class="card-back">
-            <div class="image-placeholder">Monday image</div>
-            <div class="quote">“Monday inspiration goes here.”</div>
-            <div class="source">Character name</div>
-            <div class="reflection">Short Monday reflection goes here.</div>
-          </div>
+    <div class="card" onclick="flipCard(this)">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="label">Monday</div>
+          <div class="hint">Click to reveal</div>
+        </div>
+        <div class="card-back">
+          <img src="./week04_mon.png" alt="Monday theme">
         </div>
       </div>
+    </div>
 
       <div class="card" onclick="flipCard(this)">
         <div class="card-inner">
