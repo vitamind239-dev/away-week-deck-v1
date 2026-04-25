@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Away Week Inspiration Deck</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f3ee;
+      color: #2b2b2b;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 32px;
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .week-card {
+      margin-bottom: 28px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      perspective: 1000px;
+      cursor: pointer;
+      min-height: 260px;
+    }
+
+    .week-card .card {
+      min-height: 300px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      transition: transform 0.7s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      padding: 22px;
+      box-sizing: border-box;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-front {
+      background: #ffffff;
+      border: 2px solid #ddd3c3;
+    }
+
+    .card-back {
+      background: #fffaf0;
+      border: 2px solid #c9b88f;
+      transform: rotateY(180deg);
+      overflow-y: auto;
+    }
+
+    .label {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .hint {
+      color: #777;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .quote {
+      font-size: 1.05rem;
+      line-height: 1.45;
+      font-weight: bold;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .source {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .reflection {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 120px;
+      border-radius: 12px;
+      background: #e6dfd0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #777;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .week-card .card {
+        min-height: 280px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <h1>Away Week Inspiration Deck</h1>
+    <div class="subtitle">One weekly theme. Five daily reveals. Click a card to open it.</div>
+
+    <section class="week-card">
+      <div class="card" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="label">Weekly Theme</div>
+            <div class="hint">Click to reveal the theme for the week</div>
+          </div>
+
+          <div class="card-back">
+            <div class="image-placeholder">Weekly image goes here</div>
+            <div class="quote">“Your weekly inspiration quote or statement goes here.”</div>
+            <div class="source">Historical or fictional character name</div>
+            <div class="reflection">
+              Short paragraph unpacking the weekly theme. This is where the larger arc of the week is introduced.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cards">
+
+      <div class="card" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="label">Monday</div>
+            <div class="hint">Click to reveal</div>
+          </div>
+          <div class="card-back">
+            <div class="image-placeholder">Monday image</div>
+            <div class="quote">“Monday inspiration goes here.”</div>
+            <div class="source">Character name</div>
+            <div class="reflection">Short Monday reflection goes here.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="label">Tuesday</div>
+            <div class="hint">Click to reveal</div>
+          </div>
+          <div class="card-back">
+            <div class="image-placeholder">Tuesday image</div>
+            <div class="quote">“Tuesday inspiration goes here.”</div>
+            <div class="source">Character name</div>
+            <div class="reflection">Short Tuesday reflection goes here.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="label">Wednesday</div>
+            <div class="hint">Click to reveal</div>
+          </div>
+          <div class="card-back">
+            <div class="image-placeholder">Wednesday image</div>
+            <div class="quote">“Wednesday inspiration goes here.”</div>
+            <div class="source">Character name</div>
+            <div class="reflection">Short Wednesday reflection goes here.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="label">Thursday</div>
+            <div class="hint">Click to reveal</div>
+          </div>
+          <div class="card-back">
+            <div class="image-placeholder">Thursday image</div>
+            <div class="quote">“Thursday inspiration goes here.”</div>
+            <div class="source">Character name</div>
+            <div class="reflection">Short Thursday reflection goes here.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="label">Friday</div>
+            <div class="hint">Click to reveal</div>
+          </div>
+          <div class="card-back">
+            <div class="image-placeholder">Friday image</div>
+            <div class="quote">“Friday inspiration goes here.”</div>
+            <div class="source">Character name</div>
+            <div class="reflection">Short Friday reflection goes here.</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    function flipCard(card) {
+      card.classList.toggle("flipped");
+    }
+  </script>
+</body>
+</html>
