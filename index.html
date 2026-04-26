@@ -37,11 +37,11 @@
       font-size: 1rem;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-    }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+      }
 
     @media (max-width: 900px) {
       .cards {
