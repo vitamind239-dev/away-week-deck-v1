@@ -60,38 +60,45 @@ h1 {
 }
 
 /* ===================== */
-/* BANNER (SAnE MODEL) */
+/* BANNER — SAnE FRAME */
 /* ===================== */
 
-.banner {
+/* Frame defines geometry once */
+.banner-frame {
   position: relative;
+  width: 100%;
+  aspect-ratio: 1200 / 420; /* match your image ratio */
   cursor: pointer;
 }
 
-/* key: NO fixed height */
-
+/* Layers share exact same space */
 .banner-front,
 .banner-back {
-  position: relative;
+  position: absolute;
+  inset: 0;
 }
 
-/* front = natural height container */
-.banner-front {
-  padding: 80px 20px;
-  text-align: center;
-}
-
-/* back = image defines height */
+/* Image fills frame cleanly */
 .banner-back img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: contain;
 }
 
-/* flip via display swap (no layout trickery) */
-.banner-back { display: none; }
-.banner.flipped .banner-front { display: none; }
-.banner.flipped .banner-back { display: block; }
+/* Front centers content in same frame */
+.banner-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Flip without layout impact */
+.banner-front { opacity: 1; }
+.banner-back { opacity: 0; }
+
+.banner-frame.flipped .banner-front { opacity: 0; }
+.banner-frame.flipped .banner-back { opacity: 1; }
 
 </style>
 </head>
@@ -109,17 +116,19 @@ One weekly theme, five daily reveals - click a card to open...
 <!-- BANNER -->
 <!-- ===================== -->
 
-<div class="card banner" onclick="toggleBanner(this)">
+<div class="card">
+  <div class="banner-frame" onclick="toggleBanner(this)">
 
-  <div class="banner-front">
-    <div style="font-size:1.4rem;font-weight:bold;">Weekly Theme</div>
-    <div style="color:#777;">Click to reveal the theme for the week</div>
+    <div class="banner-front">
+      <div style="font-size:1.4rem;font-weight:bold;">Weekly Theme</div>
+      <div style="color:#777;">Click to reveal the theme for the week</div>
+    </div>
+
+    <div class="banner-back">
+      <img src="./week04_banner.png">
+    </div>
+
   </div>
-
-  <div class="banner-back">
-    <img src="./week04_banner.png">
-  </div>
-
 </div>
 
 <br>
