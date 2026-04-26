@@ -47,7 +47,7 @@
     }
 
     /* ===================== */
-    /* CONTENT: BASE CARD */
+    /* CONTENT */
     /* ===================== */
 
     .card {
@@ -56,9 +56,30 @@
       background: #ffffff;
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
       overflow: hidden;
-      cursor: pointer;
-      position: relative;
     }
+
+    .card-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .label {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .hint {
+      color: #777;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    /* ===================== */
+    /* BEHAVIOR: BANNER ONLY */
+    /* ===================== */
 
     .card-inner {
       position: relative;
@@ -78,38 +99,30 @@
       inset: 0;
       backface-visibility: hidden;
       border-radius: 18px;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card-front {
+      background: #ffffff;
+      flex-direction: column;
     }
 
     .card-back {
       transform: rotateY(180deg);
+      padding: 0;
     }
 
-    .card-image {
+    .card-back img {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    /* ===================== */
-    /* CONTENT: WEEK */
-    /* ===================== */
-
-    .week-card .card {
-      cursor: pointer;
-    }
-
-    /* ===================== */
-    /* CONTENT: DAY */
-    /* ===================== */
-
-    .day-card .card {
-      cursor: pointer;
-    }
-
-    /* ===================== */
-    /* BEHAVIOR: EXPANSION */
-    /* ===================== */
+    /* expansion */
 
     .card.expanded {
       position: fixed;
@@ -128,16 +141,6 @@
       z-index: 1000;
     }
 
-    /* ===================== */
-    /* RESPONSIVE */
-    /* ===================== */
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6rem;
-      }
-    }
-
   </style>
 </head>
 
@@ -149,19 +152,22 @@
     <div class="subtitle">One weekly theme, five daily reveals - click a card to open...</div>
 
     <!-- ===================== -->
-    <!-- WEEK -->
+    <!-- WEEK BANNER (WITH BEHAVIOR) -->
     <!-- ===================== -->
 
     <section class="week-card">
-      <div class="card" onclick="toggleCard(this)">
+      <div class="card" onclick="toggleBanner(this)">
         <div class="card-inner">
 
+          <!-- FRONT -->
           <div class="card-front">
-            <img class="card-image" src="./week04_banner.png" alt="Weekly theme">
+            <div class="label">Weekly Theme</div>
+            <div class="hint">Click to reveal the theme for the week</div>
           </div>
 
+          <!-- BACK -->
           <div class="card-back">
-            <img class="card-image" src="./week04_banner.png" alt="Weekly theme back">
+            <img src="./week04_banner.png" alt="Weekly theme">
           </div>
 
         </div>
@@ -169,74 +175,29 @@
     </section>
 
     <!-- ===================== -->
-    <!-- DAYS -->
+    <!-- DAY CARDS (STATIC) -->
     <!-- ===================== -->
 
     <section class="cards">
 
-      <div class="day-card">
-        <div class="card" onclick="toggleCard(this)">
-          <div class="card-inner">
-            <div class="card-front">
-              <img class="card-image" src="./week04_mon.png" alt="Monday">
-            </div>
-            <div class="card-back">
-              <img class="card-image" src="./week04_mon.png">
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <img class="card-image" src="./week04_mon.png" alt="Monday">
       </div>
 
-      <div class="day-card">
-        <div class="card" onclick="toggleCard(this)">
-          <div class="card-inner">
-            <div class="card-front">
-              <img class="card-image" src="./week04_tue.png">
-            </div>
-            <div class="card-back">
-              <img class="card-image" src="./week04_tue.png">
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <img class="card-image" src="./week04_tue.png" alt="Tuesday">
       </div>
 
-      <div class="day-card">
-        <div class="card" onclick="toggleCard(this)">
-          <div class="card-inner">
-            <div class="card-front">
-              <img class="card-image" src="./week04_wed.png">
-            </div>
-            <div class="card-back">
-              <img class="card-image" src="./week04_wed.png">
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <img class="card-image" src="./week04_wed.png" alt="Wednesday">
       </div>
 
-      <div class="day-card">
-        <div class="card" onclick="toggleCard(this)">
-          <div class="card-inner">
-            <div class="card-front">
-              <img class="card-image" src="./week04_thu.png">
-            </div>
-            <div class="card-back">
-              <img class="card-image" src="./week04_thu.png">
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <img class="card-image" src="./week04_thu.png" alt="Thursday">
       </div>
 
-      <div class="day-card">
-        <div class="card" onclick="toggleCard(this)">
-          <div class="card-inner">
-            <div class="card-front">
-              <img class="card-image" src="./week04_fri.png">
-            </div>
-            <div class="card-back">
-              <img class="card-image" src="./week04_fri.png">
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <img class="card-image" src="./week04_fri.png" alt="Friday">
       </div>
 
     </section>
@@ -244,13 +205,12 @@
   </main>
 
   <!-- ===================== -->
-  <!-- BEHAVIOR -->
+  <!-- BEHAVIOR SCRIPT -->
   <!-- ===================== -->
 
   <script>
-    function toggleCard(card) {
+    function toggleBanner(card) {
 
-      // collapse if already open
       if (card.classList.contains('expanded')) {
         card.classList.remove('expanded');
         card.classList.remove('flipped');
@@ -258,14 +218,8 @@
         return;
       }
 
-      // reset others
-      document.querySelectorAll('.card.expanded').forEach(c => {
-        c.classList.remove('expanded');
-        c.classList.remove('flipped');
-      });
       document.querySelector('.overlay')?.remove();
 
-      // expand + flip
       card.classList.add('expanded');
       card.classList.add('flipped');
 
