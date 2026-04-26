@@ -51,49 +51,52 @@ h1 {
   overflow: hidden;
   border: 2px solid #ddd3c3;
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+
+  /* CRITICAL: remove invisible spacing */
+  padding: 0;
+  line-height: 0;
 }
 
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* images must not behave like inline text */
+img {
+  display: block;
 }
 
 /* ===================== */
-/* BANNER — SAnE FRAME */
+/* BANNER — CLEAN FRAME */
 /* ===================== */
 
-/* Frame defines geometry once */
 .banner-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 1200 / 420; /* match your image ratio */
+  aspect-ratio: 1200 / 420;
   cursor: pointer;
 }
 
-/* Layers share exact same space */
+/* perfect overlap */
 .banner-front,
 .banner-back {
   position: absolute;
   inset: 0;
 }
 
-/* Image fills frame cleanly */
+/* image owns the space fully */
 .banner-back img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
-/* Front centers content in same frame */
+/* front centered */
 .banner-front {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  line-height: normal; /* restore text */
 }
 
-/* Flip without layout impact */
+/* flip */
 .banner-front { opacity: 1; }
 .banner-back { opacity: 0; }
 
@@ -112,9 +115,7 @@ h1 {
 One weekly theme, five daily reveals - click a card to open...
 </div>
 
-<!-- ===================== -->
 <!-- BANNER -->
-<!-- ===================== -->
 
 <div class="card">
   <div class="banner-frame" onclick="toggleBanner(this)">
@@ -133,16 +134,14 @@ One weekly theme, five daily reveals - click a card to open...
 
 <br>
 
-<!-- ===================== -->
 <!-- DAYS -->
-<!-- ===================== -->
 
 <div class="cards">
-  <div class="card"><img class="card-image" src="./week04_mon.png"></div>
-  <div class="card"><img class="card-image" src="./week04_tue.png"></div>
-  <div class="card"><img class="card-image" src="./week04_wed.png"></div>
-  <div class="card"><img class="card-image" src="./week04_thu.png"></div>
-  <div class="card"><img class="card-image" src="./week04_fri.png"></div>
+  <div class="card"><img src="./week04_mon.png"></div>
+  <div class="card"><img src="./week04_tue.png"></div>
+  <div class="card"><img src="./week04_wed.png"></div>
+  <div class="card"><img src="./week04_thu.png"></div>
+  <div class="card"><img src="./week04_fri.png"></div>
 </div>
 
 </main>
