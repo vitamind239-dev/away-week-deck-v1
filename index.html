@@ -19,7 +19,7 @@ body {
 }
 
 .page {
-  max-width: 1100px;
+  max-width: 1200px; /* 🔧 widened so 5 cards fit */
   margin: 0 auto;
   padding: 32px 18px 48px;
 }
@@ -41,7 +41,7 @@ h1 {
   margin-bottom: 28px;
 }
 
-/* 🔧 FIX: lock 5 cards on desktop */
+/* 🔧 FIX 1: true 5-column layout */
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -64,47 +64,45 @@ h1 {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover; /* 🔧 removes white gap */
-}
-
-.label {
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.hint {
-  color: #777;
-  font-size: 0.95rem;
-  text-align: center;
+  object-fit: cover;
 }
 
 /* ===================== */
-/* BANNER */
+/* BANNER (STRUCTURAL FIX) */
 /* ===================== */
 
 .banner {
   cursor: pointer;
   position: relative;
+  height: 420px; /* 🔧 FIX 2: lock height */
+}
+
+/* stack instead of remove */
+.banner-front,
+.banner-back {
+  position: absolute;
+  inset: 0;
 }
 
 .banner-front {
-  padding: 120px 20px; /* gives visual height */
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .banner-back {
-  display: none;
-  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 🔧 no layout shift */
+.banner.flipped .banner-back {
+  opacity: 1;
 }
 
 .banner.flipped .banner-front {
-  display: none;
-}
-
-.banner.flipped .banner-back {
-  display: block;
+  opacity: 0;
 }
 
 /* ===================== */
@@ -138,11 +136,12 @@ One weekly theme, five daily reveals - click a card to open...
 <!-- WEEK -->
 
 <section class="week-card">
+
   <div class="card banner" onclick="toggleBanner(this)">
 
     <div class="banner-front">
-      <div class="label">Weekly Theme</div>
-      <div class="hint">Click to reveal the theme for the week</div>
+      <div style="font-size:1.4rem;font-weight:bold;">Weekly Theme</div>
+      <div style="color:#777;margin-top:8px;">Click to reveal the theme for the week</div>
     </div>
 
     <div class="banner-back">
@@ -150,6 +149,7 @@ One weekly theme, five daily reveals - click a card to open...
     </div>
 
   </div>
+
 </section>
 
 <!-- DAYS -->
