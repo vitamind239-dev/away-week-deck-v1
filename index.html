@@ -7,7 +7,10 @@
 
 <style>
 
-/* layout */
+/* ===================== */
+/* LAYOUT */
+/* ===================== */
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -29,14 +32,20 @@ h1 {
   margin-bottom: 24px;
 }
 
-/* grid */
+/* ===================== */
+/* GRID */
+/* ===================== */
+
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
 }
 
-/* card */
+/* ===================== */
+/* CARD */
+/* ===================== */
+
 .card {
   border-radius: 18px;
   overflow: hidden;
@@ -44,7 +53,6 @@ h1 {
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
 }
 
-/* day images */
 .card-image {
   width: 100%;
   height: 100%;
@@ -52,44 +60,38 @@ h1 {
 }
 
 /* ===================== */
-/* BANNER */
+/* BANNER (SAnE MODEL) */
 /* ===================== */
 
 .banner {
-  height: 420px;
   position: relative;
   cursor: pointer;
 }
 
-/* layers */
+/* key: NO fixed height */
+
 .banner-front,
 .banner-back {
-  position: absolute;
-  inset: 0;
+  position: relative;
 }
 
-/* front */
+/* front = natural height container */
 .banner-front {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 80px 20px;
+  text-align: center;
 }
 
-/* 🔧 FIX: no cropping for banner */
+/* back = image defines height */
 .banner-back img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;   /* ← key change */
-  background: #f5f3ee;   /* blends edges if aspect differs */
+  height: auto;
+  display: block;
 }
 
-/* flip */
-.banner-front { opacity: 1; }
-.banner-back { opacity: 0; }
-
-.banner.flipped .banner-front { opacity: 0; }
-.banner.flipped .banner-back { opacity: 1; }
+/* flip via display swap (no layout trickery) */
+.banner-back { display: none; }
+.banner.flipped .banner-front { display: none; }
+.banner.flipped .banner-back { display: block; }
 
 </style>
 </head>
@@ -99,23 +101,32 @@ h1 {
 <main class="page">
 
 <h1>Week Inspiration Deck (while Dima is away... ✈️🚢🌴🎉)</h1>
-<div class="subtitle">One weekly theme, five daily reveals - click a card to open...</div>
+<div class="subtitle">
+One weekly theme, five daily reveals - click a card to open...
+</div>
 
-<!-- banner -->
+<!-- ===================== -->
+<!-- BANNER -->
+<!-- ===================== -->
 
 <div class="card banner" onclick="toggleBanner(this)">
+
   <div class="banner-front">
     <div style="font-size:1.4rem;font-weight:bold;">Weekly Theme</div>
     <div style="color:#777;">Click to reveal the theme for the week</div>
   </div>
+
   <div class="banner-back">
     <img src="./week04_banner.png">
   </div>
+
 </div>
 
 <br>
 
-<!-- days -->
+<!-- ===================== -->
+<!-- DAYS -->
+<!-- ===================== -->
 
 <div class="cards">
   <div class="card"><img class="card-image" src="./week04_mon.png"></div>
@@ -129,7 +140,7 @@ h1 {
 
 <script>
 function toggleBanner(el) {
-  el.classList.toggle('flipped');
+  el.classList.toggle("flipped");
 }
 </script>
 
