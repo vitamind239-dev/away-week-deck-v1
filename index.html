@@ -7,10 +7,7 @@
 
 <style>
 
-/* ===================== */
-/* LAYOUT */
-/* ===================== */
-
+/* layout */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -32,76 +29,67 @@ h1 {
   margin-bottom: 24px;
 }
 
-/* ===================== */
-/* GRID */
-/* ===================== */
-
+/* grid */
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
 }
 
-/* ===================== */
-/* CARD */
-/* ===================== */
-
+/* card */
 .card {
   border-radius: 18px;
   overflow: hidden;
   border: 2px solid #ddd3c3;
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-
-  /* CRITICAL: remove invisible spacing */
-  padding: 0;
-  line-height: 0;
 }
 
-/* images must not behave like inline text */
-img {
-  display: block;
-}
-
-/* ===================== */
-/* BANNER — CLEAN FRAME */
-/* ===================== */
-
-.banner-frame {
-  position: relative;
+/* day images */
+.card-image {
   width: 100%;
-  aspect-ratio: 1200 / 420;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===================== */
+/* BANNER */
+/* ===================== */
+
+.banner {
+  height: 420px;
+  position: relative;
   cursor: pointer;
 }
 
-/* perfect overlap */
+/* layers */
 .banner-front,
 .banner-back {
   position: absolute;
   inset: 0;
 }
 
-/* image owns the space fully */
-.banner-back img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* front centered */
+/* front */
 .banner-front {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  line-height: normal; /* restore text */
+}
+
+/* 🔧 FIX: no cropping for banner */
+.banner-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* ← key change */
+  background: #f5f3ee;   /* blends edges if aspect differs */
 }
 
 /* flip */
 .banner-front { opacity: 1; }
 .banner-back { opacity: 0; }
 
-.banner-frame.flipped .banner-front { opacity: 0; }
-.banner-frame.flipped .banner-back { opacity: 1; }
+.banner.flipped .banner-front { opacity: 0; }
+.banner.flipped .banner-back { opacity: 1; }
 
 </style>
 </head>
@@ -111,44 +99,37 @@ img {
 <main class="page">
 
 <h1>Week Inspiration Deck (while Dima is away... ✈️🚢🌴🎉)</h1>
-<div class="subtitle">
-One weekly theme, five daily reveals - click a card to open...
-</div>
+<div class="subtitle">One weekly theme, five daily reveals - click a card to open...</div>
 
-<!-- BANNER -->
+<!-- banner -->
 
-<div class="card">
-  <div class="banner-frame" onclick="toggleBanner(this)">
-
-    <div class="banner-front">
-      <div style="font-size:1.4rem;font-weight:bold;">Weekly Theme</div>
-      <div style="color:#777;">Click to reveal the theme for the week</div>
-    </div>
-
-    <div class="banner-back">
-      <img src="./week04_banner.png">
-    </div>
-
+<div class="card banner" onclick="toggleBanner(this)">
+  <div class="banner-front">
+    <div style="font-size:1.4rem;font-weight:bold;">Weekly Theme</div>
+    <div style="color:#777;">Click to reveal the theme for the week</div>
+  </div>
+  <div class="banner-back">
+    <img src="./week04_banner.png">
   </div>
 </div>
 
 <br>
 
-<!-- DAYS -->
+<!-- days -->
 
 <div class="cards">
-  <div class="card"><img src="./week04_mon.png"></div>
-  <div class="card"><img src="./week04_tue.png"></div>
-  <div class="card"><img src="./week04_wed.png"></div>
-  <div class="card"><img src="./week04_thu.png"></div>
-  <div class="card"><img src="./week04_fri.png"></div>
+  <div class="card"><img class="card-image" src="./week04_mon.png"></div>
+  <div class="card"><img class="card-image" src="./week04_tue.png"></div>
+  <div class="card"><img class="card-image" src="./week04_wed.png"></div>
+  <div class="card"><img class="card-image" src="./week04_thu.png"></div>
+  <div class="card"><img class="card-image" src="./week04_fri.png"></div>
 </div>
 
 </main>
 
 <script>
 function toggleBanner(el) {
-  el.classList.toggle("flipped");
+  el.classList.toggle('flipped');
 }
 </script>
 
