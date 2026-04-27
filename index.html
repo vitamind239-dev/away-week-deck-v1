@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +23,6 @@ h1 { text-align: center; }
 .subtitle { text-align: center; margin-bottom: 24px; }
 
 /* GRID */
-
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -32,7 +30,6 @@ h1 { text-align: center; }
 }
 
 /* CARD */
-
 .card {
   border-radius: 18px;
   overflow: hidden;
@@ -49,7 +46,6 @@ h1 { text-align: center; }
 }
 
 /* ===== BANNER (LOCKED) ===== */
-
 .banner-front { padding: 80px 20px; text-align: center; }
 .banner-back img { width:100%; display:block; }
 
@@ -126,7 +122,6 @@ One weekly theme, five daily reveals - click a card to open...
 </div>
 
 <!-- BANNER -->
-
 <div class="card banner" onclick="toggleBanner(this)">
   <div class="banner-front">
     <strong>Weekly Theme</strong><br>
@@ -182,9 +177,31 @@ One weekly theme, five daily reveals - click a card to open...
   </div>
 </div>
 
-<!-- OTHERS -->
-<div class="card"><img src="./week04_thu.png"></div>
-<div class="card"><img src="./week04_fri.png"></div>
+<!-- THURSDAY -->
+<div class="card interactive" onclick="toggleCard(event)">
+  <div class="flip">
+    <div class="face placeholder">
+      <strong>Thursday</strong>
+      <span style="color:#777;">Click to reveal</span>
+    </div>
+    <div class="face back">
+      <img src="./week04_thu.png">
+    </div>
+  </div>
+</div>
+
+<!-- FRIDAY -->
+<div class="card interactive" onclick="toggleCard(event)">
+  <div class="flip">
+    <div class="face placeholder">
+      <strong>Friday</strong>
+      <span style="color:#777;">Click to reveal</span>
+    </div>
+    <div class="face back">
+      <img src="./week04_fri.png">
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -201,9 +218,7 @@ function toggleCard(e){
   const overlay = document.getElementById("overlay");
 
   if (!card.classList.contains("active")) {
-
     closeActiveCard();
-
     overlay.style.display = "block";
     card.classList.add("active");
 
