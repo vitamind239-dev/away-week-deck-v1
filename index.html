@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +7,6 @@
 <title>Week Inspiration Deck</title>
 
 <style>
-
-/* ===================== */
-/* LAYOUT */
-/* ===================== */
 
 body {
   margin: 0;
@@ -45,8 +42,6 @@ h1 { text-align: center; }
   aspect-ratio: 4/3;
 }
 
-/* IMAGE */
-
 .card img {
   width: 100%;
   height: 100%;
@@ -62,7 +57,7 @@ h1 { text-align: center; }
 .banner.flipped .banner-front { display:none; }
 .banner.flipped .banner-back { display:block; }
 
-/* ===== SHARED INTERACTIVE CARD MODEL ===== */
+/* ===== INTERACTIVE CARD SYSTEM ===== */
 
 .overlay {
   position: fixed;
@@ -77,7 +72,6 @@ h1 { text-align: center; }
   position: relative;
 }
 
-/* expanded state */
 .interactive.active {
   position: fixed;
   top: 50%;
@@ -88,8 +82,6 @@ h1 { text-align: center; }
   transform: translate(-50%, -50%);
   z-index: 200;
 }
-
-/* flip */
 
 .flip {
   width: 100%;
@@ -133,7 +125,7 @@ h1 { text-align: center; }
 One weekly theme, five daily reveals - click a card to open...
 </div>
 
-<!-- ===== BANNER (UNCHANGED) ===== -->
+<!-- BANNER -->
 
 <div class="card banner" onclick="toggleBanner(this)">
   <div class="banner-front">
@@ -151,7 +143,7 @@ One weekly theme, five daily reveals - click a card to open...
 
 <div class="cards">
 
-<!-- MONDAY (LOCKED) -->
+<!-- MONDAY -->
 <div class="card interactive" onclick="toggleCard(event)">
   <div class="flip">
     <div class="face placeholder">
@@ -164,7 +156,7 @@ One weekly theme, five daily reveals - click a card to open...
   </div>
 </div>
 
-<!-- TUESDAY (CLONED) -->
+<!-- TUESDAY -->
 <div class="card interactive" onclick="toggleCard(event)">
   <div class="flip">
     <div class="face placeholder">
@@ -177,8 +169,20 @@ One weekly theme, five daily reveals - click a card to open...
   </div>
 </div>
 
+<!-- WEDNESDAY -->
+<div class="card interactive" onclick="toggleCard(event)">
+  <div class="flip">
+    <div class="face placeholder">
+      <strong>Wednesday</strong>
+      <span style="color:#777;">Click to reveal</span>
+    </div>
+    <div class="face back">
+      <img src="./week04_wed.png">
+    </div>
+  </div>
+</div>
+
 <!-- OTHERS -->
-<div class="card"><img src="./week04_wed.png"></div>
 <div class="card"><img src="./week04_thu.png"></div>
 <div class="card"><img src="./week04_fri.png"></div>
 
@@ -188,12 +192,9 @@ One weekly theme, five daily reveals - click a card to open...
 
 <script>
 
-/* banner */
 function toggleBanner(el){
   el.classList.toggle("flipped");
 }
-
-/* unified card logic */
 
 function toggleCard(e){
   const card = e.currentTarget;
@@ -201,7 +202,6 @@ function toggleCard(e){
 
   if (!card.classList.contains("active")) {
 
-    // close any open card first
     closeActiveCard();
 
     overlay.style.display = "block";
