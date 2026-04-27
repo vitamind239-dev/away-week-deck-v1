@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +30,17 @@ h1 { text-align: center; }
   gap: 16px;
 }
 
-/* CARD */
+/* CARD BASE */
 .card {
   border-radius: 18px;
   overflow: hidden;
   border: 2px solid #ddd3c3;
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
   background: white;
+}
+
+/* DAY CARDS ONLY */
+.cards .card {
   aspect-ratio: 4/3;
 }
 
@@ -45,15 +50,24 @@ h1 { text-align: center; }
   object-fit: cover;
 }
 
-/* ===== BANNER (LOCKED) ===== */
-.banner-front { padding: 80px 20px; text-align: center; }
-.banner-back img { width:100%; display:block; }
+/* ===== BANNER (FIXED CLEANLY) ===== */
+.banner {
+  aspect-ratio: auto;     /* remove inherited sizing */
+}
+
+.banner-front { padding: 60px 20px; text-align: center; }
+
+.banner-back img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 .banner-back { display:none; }
 .banner.flipped .banner-front { display:none; }
 .banner.flipped .banner-back { display:block; }
 
-/* ===== INTERACTIVE CARD SYSTEM ===== */
+/* ===== INTERACTIVE CARDS ===== */
 
 .overlay {
   position: fixed;
@@ -138,68 +152,38 @@ One weekly theme, five daily reveals - click a card to open...
 
 <div class="cards">
 
-<!-- MONDAY -->
 <div class="card interactive" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder">
-      <strong>Monday</strong>
-      <span style="color:#777;">Click to reveal</span>
-    </div>
-    <div class="face back">
-      <img src="./week04_mon.png">
-    </div>
+    <div class="face placeholder"><strong>Monday</strong><span style="color:#777;">Click</span></div>
+    <div class="face back"><img src="./week04_mon.png"></div>
   </div>
 </div>
 
-<!-- TUESDAY -->
 <div class="card interactive" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder">
-      <strong>Tuesday</strong>
-      <span style="color:#777;">Click to reveal</span>
-    </div>
-    <div class="face back">
-      <img src="./week04_tue.png">
-    </div>
+    <div class="face placeholder"><strong>Tuesday</strong><span style="color:#777;">Click</span></div>
+    <div class="face back"><img src="./week04_tue.png"></div>
   </div>
 </div>
 
-<!-- WEDNESDAY -->
 <div class="card interactive" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder">
-      <strong>Wednesday</strong>
-      <span style="color:#777;">Click to reveal</span>
-    </div>
-    <div class="face back">
-      <img src="./week04_wed.png">
-    </div>
+    <div class="face placeholder"><strong>Wednesday</strong><span style="color:#777;">Click</span></div>
+    <div class="face back"><img src="./week04_wed.png"></div>
   </div>
 </div>
 
-<!-- THURSDAY -->
 <div class="card interactive" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder">
-      <strong>Thursday</strong>
-      <span style="color:#777;">Click to reveal</span>
-    </div>
-    <div class="face back">
-      <img src="./week04_thu.png">
-    </div>
+    <div class="face placeholder"><strong>Thursday</strong><span style="color:#777;">Click</span></div>
+    <div class="face back"><img src="./week04_thu.png"></div>
   </div>
 </div>
 
-<!-- FRIDAY -->
 <div class="card interactive" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder">
-      <strong>Friday</strong>
-      <span style="color:#777;">Click to reveal</span>
-    </div>
-    <div class="face back">
-      <img src="./week04_fri.png">
-    </div>
+    <div class="face placeholder"><strong>Friday</strong><span style="color:#777;">Click</span></div>
+    <div class="face back"><img src="./week04_fri.png"></div>
   </div>
 </div>
 
@@ -222,10 +206,7 @@ function toggleCard(e){
     overlay.style.display = "block";
     card.classList.add("active");
 
-    setTimeout(() => {
-      card.classList.add("flipped");
-    }, 120);
-
+    setTimeout(() => card.classList.add("flipped"), 120);
   } else {
     closeActiveCard();
   }
