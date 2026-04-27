@@ -192,15 +192,23 @@ function isUnlocked(dayIndex) {
 
   const now = new Date();
 
-  const alaskaTime = new Date(
+  const alaskaNow = new Date(
     now.toLocaleString("en-US", { timeZone: "America/Anchorage" })
   );
 
-  const start = new Date("2026-05-04T08:00:00"); // Monday 9am AK
-  const unlock = new Date(start);
-  unlock.setDate(start.getDate() + (dayIndex - 1));
+  // Build Alaska-based start correctly
+  const start = new Date(alaskaNow);
+  start.setHours(9, 0, 0, 0);
 
-  return alaskaTime >= unlock;
+  // Move to Monday of this week
+  const dayOfWeek = alaskaNow.getDay(); // 0=Sun
+  const diffToMonday = (dayOfWeek + 6) % 7;
+  start.setDate(alaskaNow.getDate() - diffToMonday);
+
+  // Add offset per card
+  start.setDate(start.getDate() + (dayIndex - 1));
+
+  return alaskaNow >= start;
 }
 
 /* CARD */
