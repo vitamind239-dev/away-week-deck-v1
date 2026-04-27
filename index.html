@@ -22,7 +22,7 @@ body {
 h1 { text-align: center; }
 .subtitle { text-align: center; margin-bottom: 24px; }
 
-/* ================= GRID ================= */
+/* GRID */
 
 .cards {
   display: grid;
@@ -30,7 +30,7 @@ h1 { text-align: center; }
   gap: 16px;
 }
 
-/* ================= CARD ================= */
+/* CARD BASE */
 
 .card {
   border-radius: 18px;
@@ -38,7 +38,6 @@ h1 { text-align: center; }
   border: 2px solid #ddd3c3;
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
   background: white;
-  cursor: pointer;
   aspect-ratio: 4/3;
 }
 
@@ -48,7 +47,7 @@ h1 { text-align: center; }
   object-fit: cover;
 }
 
-/* ================= BANNER ================= */
+/* ===== BANNER (UNCHANGED) ===== */
 
 .banner-front { padding: 80px 20px; text-align: center; }
 .banner-back img { width:100%; display:block; }
@@ -57,7 +56,7 @@ h1 { text-align: center; }
 .banner.flipped .banner-front { display:none; }
 .banner.flipped .banner-back { display:block; }
 
-/* ================= MONDAY ================= */
+/* ===== MONDAY ===== */
 
 .overlay {
   position: fixed;
@@ -68,24 +67,24 @@ h1 { text-align: center; }
 }
 
 .monday {
+  cursor: pointer;
   position: relative;
-  z-index: 1;
 }
 
-/* ACTIVE — real expansion */
+/* expanded state */
 .monday.active {
   position: fixed;
   top: 50%;
   left: 50%;
   width: 70vw;
   max-width: 900px;
-  height: auto;
   aspect-ratio: 4/3;
   transform: translate(-50%, -50%);
   z-index: 200;
 }
 
-/* flip core */
+/* flip */
+
 .flip {
   width: 100%;
   height: 100%;
@@ -108,7 +107,6 @@ h1 { text-align: center; }
   transform: rotateY(180deg);
 }
 
-/* placeholder front */
 .placeholder {
   display:flex;
   align-items:center;
@@ -129,7 +127,7 @@ h1 { text-align: center; }
 One weekly theme, five daily reveals - click a card to open...
 </div>
 
-<!-- BANNER (UNCHANGED) -->
+<!-- BANNER (LEFT EXACTLY AS BEFORE) -->
 <div class="card banner" onclick="toggleBanner(this)">
   <div class="banner-front">
     <strong>Weekly Theme</strong><br>
@@ -147,7 +145,7 @@ One weekly theme, five daily reveals - click a card to open...
 <div class="cards">
 
 <!-- MONDAY -->
-<div class="card monday" onclick="openMonday(event)">
+<div class="card monday" onclick="toggleMonday(event)">
   <div class="flip">
 
     <div class="face placeholder">
@@ -178,9 +176,9 @@ function toggleBanner(el){
   el.classList.toggle("flipped");
 }
 
-/* MONDAY */
+/* MONDAY — FIXED TOGGLE */
 
-function openMonday(e){
+function toggleMonday(e){
   const card = e.currentTarget;
   const overlay = document.getElementById("overlay");
 
@@ -191,6 +189,8 @@ function openMonday(e){
     setTimeout(() => {
       card.classList.add("flipped");
     }, 120);
+  } else {
+    closeMonday();
   }
 }
 
