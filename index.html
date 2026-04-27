@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,14 +22,12 @@ body {
 h1 { text-align: center; }
 .subtitle { text-align: center; margin-bottom: 24px; }
 
-/* GRID */
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
 }
 
-/* CARD BASE */
 .card {
   border-radius: 18px;
   overflow: hidden;
@@ -39,7 +36,6 @@ h1 { text-align: center; }
   background: white;
 }
 
-/* DAY CARDS ONLY */
 .cards .card {
   aspect-ratio: 4/3;
 }
@@ -50,24 +46,16 @@ h1 { text-align: center; }
   object-fit: cover;
 }
 
-/* ===== BANNER (FIXED CLEANLY) ===== */
-.banner {
-  aspect-ratio: auto;     /* remove inherited sizing */
-}
+/* BANNER (LOCKED) */
 
-.banner-front { padding: 60px 20px; text-align: center; }
-
-.banner-back img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+.banner-front { padding: 80px 20px; text-align: center; }
+.banner-back img { width:100%; display:block; }
 
 .banner-back { display:none; }
 .banner.flipped .banner-front { display:none; }
 .banner.flipped .banner-back { display:block; }
 
-/* ===== INTERACTIVE CARDS ===== */
+/* INTERACTIVE */
 
 .overlay {
   position: fixed;
@@ -130,7 +118,7 @@ h1 { text-align: center; }
 
 <main class="page">
 
-<h1>Week Inspiration Deck (while Dima is away... ✈️🚢🌴🎉)</h1>
+<h1>Week Inspiration Deck</h1>
 <div class="subtitle">
 One weekly theme, five daily reveals - click a card to open...
 </div>
@@ -139,7 +127,7 @@ One weekly theme, five daily reveals - click a card to open...
 <div class="card banner" onclick="toggleBanner(this)">
   <div class="banner-front">
     <strong>Weekly Theme</strong><br>
-    <span style="color:#777;">Click to reveal the theme for the week</span>
+    <span style="color:#777;">Click to reveal the theme</span>
   </div>
   <div class="banner-back">
     <img src="./week04_banner.png">
@@ -152,37 +140,37 @@ One weekly theme, five daily reveals - click a card to open...
 
 <div class="cards">
 
-<div class="card interactive" onclick="toggleCard(event)">
+<div class="card interactive" data-day="1" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder"><strong>Monday</strong><span style="color:#777;">Click</span></div>
+    <div class="face placeholder"><strong>Monday</strong></div>
     <div class="face back"><img src="./week04_mon.png"></div>
   </div>
 </div>
 
-<div class="card interactive" onclick="toggleCard(event)">
+<div class="card interactive" data-day="2" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder"><strong>Tuesday</strong><span style="color:#777;">Click</span></div>
+    <div class="face placeholder"><strong>Tuesday</strong></div>
     <div class="face back"><img src="./week04_tue.png"></div>
   </div>
 </div>
 
-<div class="card interactive" onclick="toggleCard(event)">
+<div class="card interactive" data-day="3" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder"><strong>Wednesday</strong><span style="color:#777;">Click</span></div>
+    <div class="face placeholder"><strong>Wednesday</strong></div>
     <div class="face back"><img src="./week04_wed.png"></div>
   </div>
 </div>
 
-<div class="card interactive" onclick="toggleCard(event)">
+<div class="card interactive" data-day="4" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder"><strong>Thursday</strong><span style="color:#777;">Click</span></div>
+    <div class="face placeholder"><strong>Thursday</strong></div>
     <div class="face back"><img src="./week04_thu.png"></div>
   </div>
 </div>
 
-<div class="card interactive" onclick="toggleCard(event)">
+<div class="card interactive" data-day="5" onclick="toggleCard(event)">
   <div class="flip">
-    <div class="face placeholder"><strong>Friday</strong><span style="color:#777;">Click</span></div>
+    <div class="face placeholder"><strong>Friday</strong></div>
     <div class="face back"><img src="./week04_fri.png"></div>
   </div>
 </div>
@@ -193,20 +181,47 @@ One weekly theme, five daily reveals - click a card to open...
 
 <script>
 
+/* BANNER */
 function toggleBanner(el){
   el.classList.toggle("flipped");
 }
 
+/* TIME LOCK */
+
+function isUnlocked(dayIndex) {
+
+  const now = new Date();
+
+  const alaskaTime = new Date(
+    now.toLocaleString("en-US", { timeZone: "America/Anchorage" })
+  );
+
+  const start = new Date("2026-05-04T08:00:00"); // Monday 9am AK
+  const unlock = new Date(start);
+  unlock.setDate(start.getDate() + (dayIndex - 1));
+
+  return alaskaTime >= unlock;
+}
+
+/* CARD */
+
 function toggleCard(e){
+
   const card = e.currentTarget;
+  const day = Number(card.dataset.day);
+
+  if (!isUnlocked(day)) return;
+
   const overlay = document.getElementById("overlay");
 
   if (!card.classList.contains("active")) {
+
     closeActiveCard();
     overlay.style.display = "block";
     card.classList.add("active");
 
     setTimeout(() => card.classList.add("flipped"), 120);
+
   } else {
     closeActiveCard();
   }
