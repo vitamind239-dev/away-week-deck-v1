@@ -23,14 +23,8 @@ body {
   padding: 32px 18px;
 }
 
-h1 {
-  text-align: center;
-}
-
-.subtitle {
-  text-align: center;
-  margin-bottom: 24px;
-}
+h1 { text-align: center; }
+.subtitle { text-align: center; margin-bottom: 24px; }
 
 /* ===================== */
 /* GRID */
@@ -51,6 +45,8 @@ h1 {
   overflow: hidden;
   border: 2px solid #ddd3c3;
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  background: white;
+  cursor: pointer;
 }
 
 .card-image {
@@ -60,7 +56,7 @@ h1 {
 }
 
 /* ===================== */
-/* BANNER (SAnE MODEL) */
+/* BANNER (UNCHANGED) */
 /* ===================== */
 
 .banner {
@@ -68,30 +64,91 @@ h1 {
   cursor: pointer;
 }
 
-/* key: NO fixed height */
-
 .banner-front,
 .banner-back {
   position: relative;
 }
 
-/* front = natural height container */
 .banner-front {
   padding: 80px 20px;
   text-align: center;
 }
 
-/* back = image defines height */
 .banner-back img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* flip via display swap (no layout trickery) */
 .banner-back { display: none; }
 .banner.flipped .banner-front { display: none; }
 .banner.flipped .banner-back { display: block; }
+
+/* ===================== */
+/* MONDAY CARD BEHAVIOR */
+/* ===================== */
+
+/* isolate Monday */
+.monday {
+  position: relative;
+  z-index: 1;
+}
+
+/* overlay backdrop */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 100;
+}
+
+/* active state */
+.monday.active {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  max-width: 700px;
+  transform: translate(-50%, -50%) scale(1.2);
+  z-index: 200;
+  transition: all 0.3s ease;
+}
+
+/* flip container */
+.flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.monday.flipped .flip {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+/* front placeholder */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* ===================== */
 
 </style>
 </head>
@@ -106,42 +163,90 @@ One weekly theme, five daily reveals - click a card to open...
 </div>
 
 <!-- ===================== -->
-<!-- BANNER -->
+<!-- BANNER (UNCHANGED) -->
 <!-- ===================== -->
 
 <div class="card banner" onclick="toggleBanner(this)">
-
   <div class="banner-front">
     <div style="font-size:1.4rem;font-weight:bold;">Weekly Theme</div>
     <div style="color:#777;">Click to reveal the theme for the week</div>
   </div>
-
   <div class="banner-back">
     <img src="./week04_banner.png">
   </div>
-
 </div>
 
 <br>
+
+<!-- overlay -->
+<div class="overlay" id="overlay" onclick="closeMonday()"></div>
 
 <!-- ===================== -->
 <!-- DAYS -->
 <!-- ===================== -->
 
 <div class="cards">
-  <div class="card"><img class="card-image" src="./week04_mon.png"></div>
+
+  <!-- MONDAY -->
+  <div class="card monday" onclick="openMonday(event)">
+    <div class="flip">
+
+      <div class="front placeholder">
+        <div><strong>Monday</strong></div>
+        <div style="color:#777;">Click to reveal</div>
+      </div>
+
+      <div class="back">
+        <img class="card-image" src="./week04_mon.png">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OTHERS (UNCHANGED) -->
   <div class="card"><img class="card-image" src="./week04_tue.png"></div>
   <div class="card"><img class="card-image" src="./week04_wed.png"></div>
   <div class="card"><img class="card-image" src="./week04_thu.png"></div>
   <div class="card"><img class="card-image" src="./week04_fri.png"></div>
+
 </div>
 
 </main>
 
 <script>
+
 function toggleBanner(el) {
   el.classList.toggle("flipped");
 }
+
+/* MONDAY LOGIC */
+
+function openMonday(e) {
+  const card = e.currentTarget;
+  const overlay = document.getElementById("overlay");
+
+  if (!card.classList.contains("active")) {
+    overlay.style.display = "block";
+    card.classList.add("active");
+
+    setTimeout(() => {
+      card.classList.add("flipped");
+    }, 100);
+  }
+}
+
+function closeMonday() {
+  const card = document.querySelector(".monday");
+  const overlay = document.getElementById("overlay");
+
+  card.classList.remove("flipped");
+
+  setTimeout(() => {
+    card.classList.remove("active");
+    overlay.style.display = "none";
+  }, 300);
+}
+
 </script>
 
 </body>
